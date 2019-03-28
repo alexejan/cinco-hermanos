@@ -81,5 +81,6 @@ trace = go.Table(
 
 layout = dict(width=1850, height=1200)
 fig = dict(data=[trace], layout=layout)
+cni.reset_index(inplace=True)
 cni.to_csv('cni.csv')
 py.offline.plot(fig)

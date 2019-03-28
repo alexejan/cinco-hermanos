@@ -10,7 +10,6 @@ from pyscbwrapper import SCB
 
 
 sys.stdout.reconfigure(encoding='utf-8')
-os.chdir('c:/users/Kalle/documents/skola/programmering/kursprojekt/grupparbete')
 
 
 def get_tables(a, b, c, d=''):
@@ -102,8 +101,9 @@ scb_varden = get_data(scb)
 nyinflyttade = pd.DataFrame(scb_varden, index=lan_koder_scb.values(), columns=['Nyinflyttad'])
 
 
-arbetslosa = pd.read_pickle('arbetslosa.pickle')
-utlandsfodda = pd.read_pickle('utlandsfodda.pickle')
+arbetslosa = pd.read_pickle('../../arbetslosa.pickle')
+utlandsfodda = pd.read_pickle('../../utlandsfodda.pickle')
+
 
 
 befolkning['Befolkning 0-4'] = befolkning_0_4['Befolkning 0-4']
@@ -115,6 +115,7 @@ befolkning['Ensamstående föräldrar'] = ensamstaende['Ensamstående föräldra
 befolkning['Nyinflyttad'] = nyinflyttade['Nyinflyttad']
 befolkning['Arbetslös'] = arbetslosa['Totalt']
 befolkning['Lågutbildad'] = lagutbildade['Lågutbildad']
-
+befolkning.index.name = 'Län'
+befolkning.reset_index(inplace=True)
 befolkning.to_csv('befolkning.csv')
 
