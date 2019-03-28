@@ -8,6 +8,7 @@ import collections
 import time
 from pyscbwrapper import SCB
 
+
 sys.stdout.reconfigure(encoding='utf-8')
 os.chdir('c:/users/Kalle/documents/skola/programmering/kursprojekt/grupparbete')
 
@@ -28,26 +29,16 @@ def get_tables(a, b, c, d=''):
 # Hämtar en variabel för hur många gånger en loop i get_data ska köras per län,
 # dvs hur många datapunkter per län det finns.
 
-def get_loops(tabell):
-    cnt = collections.Counter()
-    lis=[]
-    for i in range(len(tabell)):
-        lis.append(tabell[i]['key'][0][:2])             # lägger in de två första tecknen i läns/ort-koden i lis
-    for i in lis:
-        cnt[i] += 1                                     # lägger till hur många gånger ett visst län förekommer
-    return cnt
 
 def get_data(scb_data):
-    tabell = scb_data.get_data()['data']
-    loops = get_loops(tabell)
-    sum_per_lan = []
-    for i in range(21):
-        temp = []
-        for j in range(list(loops.values())[i]):
-            temp.append(int(float(tabell[j+sum(list(loops.values())[0:i])]['values'][0])))
-        sum_per_lan.append(sum(temp))
-        temp = []
-    return sum_per_lan
+    scb_data = scb_data.get_data()['data']
+    d = collections.defaultdict(list)
+    for i in range(len(scb_data)):
+        d[scb_data[i]['key'][0][:2]].append(scb_data[i]['values'][0])
+    varden = []
+    for i in d:
+        varden.append([np.sum([int(i) for i in d[i]])])
+    return varden
 
 
 alder = [(str(x) + ' år') for x in range(65, 100)]
@@ -65,6 +56,7 @@ scb.set_query(region=lan_koder_scb.values(), år=['2018'], tabellinnehåll=['Fol
 scb_varden = get_data(scb)
 befolkning_16_64 = pd.DataFrame(scb_varden, index=lan_koder_scb.values(), columns=['Befolkning 16-64'])
 
+time.sleep(10)
 
 scb, ort_koder_scb, lan_koder_scb = get_tables('BE', 'BE0101', 'BE0101A', 'BefolkningNy')
 scb.set_query(region=lan_koder_scb.values(), år=['2018'], tabellinnehåll=['Folkmängd'])
@@ -78,6 +70,7 @@ scb.set_query(region=lan_koder_scb.values(), år=['2018'], tabellinnehåll=['Fol
 scb_varden = get_data(scb)
 befolkning_0_4 = pd.DataFrame(scb_varden, index=lan_koder_scb.values(), columns=['Befolkning 0-4'])
 
+time.sleep(10)
 
 scb, ort_koder_scb, lan_koder_scb = get_tables('BE', 'BE0101', 'BE0101A', 'BefolkningNy')
 scb.set_query(region=lan_koder_scb.values(), år=['2017'], tabellinnehåll=['Folkmängd'],
@@ -86,14 +79,14 @@ scb_varden = get_data(scb)
 befolkning_25_64 = pd.DataFrame(scb_varden, index=lan_koder_scb.values(), columns=['Befolkning 25-64'])
 
 
-time.sleep(15)
-
 
 scb, ort_koder_scb, lan_koder_scb = get_tables('LE', 'LE0102', 'LE0102J', 'LE0102T19N')
 scb.set_query(region=list(lan_koder_scb.values()), år=['2017'], barnensålder='0-17 år',
               familjetyp=['ensamstående mor', 'ensamstående far'], antalbarn='totalt ')
 scb_varden = get_data(scb)
 ensamstaende = pd.DataFrame(scb_varden, index=lan_koder_scb.values(), columns=['Ensamstående föräldrar'])
+
+time.sleep(10)
 
 
 scb, ort_koder_scb, lan_koder_scb = get_tables('UF', 'UF0506', 'Utbildning')
@@ -124,3 +117,4 @@ befolkning['Arbetslös'] = arbetslosa['Totalt']
 befolkning['Lågutbildad'] = lagutbildade['Lågutbildad']
 
 befolkning.to_csv('befolkning.csv')
+
