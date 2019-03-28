@@ -35,9 +35,9 @@ columns_avg = []
 for column in cni.iloc[:, 1:]:
     columns_avg.append(round(np.mean(cni[column]), 2))
 
-cni['Cnisumma'] = cni.sum(axis=1)
-cni['CNI'] = round(cni['Cnisumma'] / cni['Cnisumma'].mean(axis=0), 2)
-cni.drop(['Cnisumma'], axis=1, inplace=True)
+# cni['Cnisumma'] = cni.sum(axis=1)
+# cni['CNI'] = round(cni['Cnisumma'] / cni['Cnisumma'].mean(axis=0), 2)
+# cni.drop(['Cnisumma'], axis=1, inplace=True)
 
 cni_norm = pd.DataFrame(cni['Län'])
 counter = 0
@@ -45,7 +45,7 @@ for i in cni.iloc[:, 1:8]:
     cni_norm[i] = cni[i] / columns_avg[counter]
     counter += 1
 
-cni['CNInorm'] = round(cni_norm.iloc[:, 1:].sum(axis=1) / len(list(cni)[1:-1]), 2)
+cni['CNInorm'] = round(cni_norm.iloc[:, 1:].sum(axis=1) / len(list(cni)[1:]), 2)
 cni.sort_values(by=['CNInorm'], inplace=True)
 
 rank_0_9 = []
@@ -64,24 +64,23 @@ trace = go.Table(
     cells = dict(
         values = [cni['Län'], cni['<5 år'], cni['Utlandsfödda (Urval länder)'], cni['Ensamboende 65+'],
                   cni['Ensamstående föräldrar'], cni['Nyinflyttad'], cni['Arbetslös'], cni['Lågutbildad'],
-                  cni['CNI'], cni['CNInorm']],
+                  cni['CNInorm']],
         align = 'center',
         fill = dict(
             color = [['white'], np.array(colors)[rank_0_9[0]], np.array(colors)[rank_0_9[1]],
                                 np.array(colors)[rank_0_9[2]], np.array(colors)[rank_0_9[3]],
                                 np.array(colors)[rank_0_9[4]], np.array(colors)[rank_0_9[5]],
-                                np.array(colors)[rank_0_9[6]], np.array(colors)[rank_0_9[7]],
-                                np.array(colors)[rank_0_9[8]]]),
+                                np.array(colors)[rank_0_9[6]], np.array(colors)[rank_0_9[7]]]),
         line = dict(
             color = [['white'], np.array(colors)[rank_0_9[0]], np.array(colors)[rank_0_9[1]],
                                 np.array(colors)[rank_0_9[2]], np.array(colors)[rank_0_9[3]],
                                 np.array(colors)[rank_0_9[4]], np.array(colors)[rank_0_9[5]],
-                                np.array(colors)[rank_0_9[6]], np.array(colors)[rank_0_9[7]],
-                                np.array(colors)[rank_0_9[8]]])
+                                np.array(colors)[rank_0_9[6]], np.array(colors)[rank_0_9[7]]])
         )
     )
 
 layout = dict(width=1850, height=1200)
 fig = dict(data=[trace], layout=layout)
+cni.reset_index(inplace=True)
 cni.to_csv('cni.csv')
 py.offline.plot(fig)
