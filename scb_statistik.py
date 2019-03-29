@@ -115,6 +115,7 @@ befolkning['Ensamstående föräldrar'] = ensamstaende['Ensamstående föräldra
 befolkning['Nyinflyttad'] = nyinflyttade['Nyinflyttad']
 befolkning['Arbetslös'] = arbetslosa['Totalt']
 befolkning['Lågutbildad'] = lagutbildade['Lågutbildad']
+befolkning['Länskod'] = lan_koder_scb.keys()
 befolkning.index.name = 'Län'
 befolkning.reset_index(inplace=True)
 befolkning.to_csv('befolkning.csv')
