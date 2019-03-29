@@ -20,8 +20,10 @@ colors = cl.scales['9']['div']['RdBu']
 colors.reverse()
 
 # Lägger till kolumner som är andelar i procent
-befolkning = pd.read_csv('befolkning.csv')
+befolkning_csv = pd.read_csv('befolkning.csv')
+befolkning = befolkning_csv.iloc[:,:-1]
 cni = pd.DataFrame(befolkning['Län'])
+
 cni['<5 år'] = round((befolkning['Befolkning 0-4'] / befolkning['Befolkning Total'] * 100), 2)
 cni['Utlandsfödda (Urval länder)'] = round((befolkning['Utlandsfödda urval'] / befolkning['Befolkning Total'] * 100), 2)
 cni['Ensamboende 65+'] = round((befolkning['Ensamboende 65+'] / befolkning['Befolkning Total'] * 100), 2)
@@ -54,6 +56,7 @@ for i in list(cni.iloc[:, 1:]):
 
 
 trace = go.Table(
+    columnwidth = [2.8,1,1,1,1,1,1,1],
     header = dict(
         values = list(cni),
         line = dict(color = 'white'),
@@ -79,8 +82,11 @@ trace = go.Table(
         )
     )
 
-layout = dict(width=1850, height=1200)
+layout = dict(width=1250, height=1200)
 fig = dict(data=[trace], layout=layout)
+cni.insert(0, column='Länskod', value=befolkning_csv['Länskod'].apply(lambda x: '{0:0>2}'.format(x)))
 cni.reset_index(inplace=True)
+cni.index.name = 'Index'
+cni.drop(cni.iloc[:, 0:1], axis=1, inplace=True)
 cni.to_csv('cni.csv')
 py.offline.plot(fig)
