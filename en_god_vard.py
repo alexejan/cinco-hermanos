@@ -44,15 +44,15 @@ dflist = [dflist[i].groupby(['geo_cat', 'period', 'name_short'], as_index=False)
 data = []
 loopcounter = []
 for i in range(len(dflist)):
-    c = 0
+    counter = 0
     a = list(set(dflist[i]['period']))
     a.sort()
     for year in a:
         x = dflist[i]['geo_cat'].loc[dflist[i]['period'] == year]
         y = dflist[i]['value'].loc[dflist[i]['period'] == year]
         data.append(go.Bar(x=x, y=y, name=year))
-        c += 1
-    loopcounter.append(c)
+        counter += 1
+    loopcounter.append(counter)
 
 x = 0
 y = 0
