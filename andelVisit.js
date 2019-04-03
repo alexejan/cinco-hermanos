@@ -144,6 +144,7 @@ var trace1 = {
     fill: 'tozeroy',
     type: 'scatter',
     mode:'lines+markers',
+
 };
 
 var layout = {

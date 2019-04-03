@@ -361,7 +361,7 @@ var availResult17 = countyResults(avail17);//anropar funktionen för enhetsnamn 
 var avail18 = filter18(avail) //samma process som ovan.
 var availName18 = countyNames(avail18);
 var availResult18 = countyResults(avail18);
-
+console.log(avail17)
 
 var trace1 = {
     x: availName17,
@@ -408,4 +408,4 @@ var trace1 = {
     bargroupgap: 0.1
   };
   
-  Plotly.newPlot('avail', data, layout, {showSendToCloud:true});
+  Plotly.newPlot('avail1', data, layout, {showSendToCloud:true});

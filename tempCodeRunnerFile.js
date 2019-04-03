@@ -407,45 +407,4 @@ var resultQue17 = countyResults(queue17);
 var queue18 = filter18(queue);
 var countyQue18 = countyNames(queue18);
 var resultQue18 = countyResults(queue18);
-console.log (queue17)
-
-var trace3 = {
-    x: countyQue17, 
-    y: resultQue17,
-    type: 'bar',
-    name: 'År 2017',
-    marker: {
-      color: 'rgb(49,130,189)',
-      opacity: 0.8
-    }
-  };
-
-  var trace4 = {
-    x: countyQue18,
-    y: resultQue18,
-    type: 'bar',
-    name: 'År 2018',
-    marker: {
-      color: 'rgb(255, 179, 102)',
-      opacity: 0.8
-    }
-  };
-  
-  var hej = [trace3, trace4];
-  
-  var layout = {
-    title: 'Rimlig väntetid till vård- eller hälsocentral',
-    margin: {
-        b: 150,
-    },
-    xaxis: {
-      tickangle: -45,
-      title: {
-          text: 'Källa: Verksamhetsstatistik, Sveriges Kommuner och Landsting',
-          },
-          titlefont: {
-            size: 12,
-    },
-    },
-};
-  Plotly.newPlot('queue1', hej, layout);
+console.log (resultQue18)

@@ -141,6 +141,7 @@ function countyNames(names) { //deklarerar variablen för funktionen.
     } 
     return countys //returnerar variablen.
 };
+
 //samma process som ovan.
 function countyResults(results){ 
     let values = [];
@@ -148,11 +149,12 @@ function countyResults(results){
         values.push(results[i].Resultat);//laddar in lokala variablen.
     }
     return values //returnerar array properties.
-};
+}; 
 
 
 var countyResult1 = countyResults(costPerCare); //anropar funktionen
 var countyCostName = countyNames(costPerCare); //--
+
 //skapar en funktion för att ta bort sek. Och byter datatyp till INT.
 function sliceSEK(sek) {  //definierar funktionens variabel. och sätter in ett random namn till den nya variabeln.
     for(var i=0; i < sek.length; i++) { //loppar igenom array.

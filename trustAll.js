@@ -269,7 +269,7 @@ var trust = [
 
 // Funktion för filtrering av Array efter år 2017.
 function filter17(data17) {
-    let trust2017 = trust.filter(function(trust17) { //definierar funktionens variabel trust2017
+    let trust2017 = data17.filter(function(trust17) { //definierar funktionens variabel trust2017
     return (trust17.År == "2017");  //returnerar alla objekt med properties som är lika med 2017.
     });
     return trust2017; //laddar in properties till trust2017
@@ -277,20 +277,20 @@ function filter17(data17) {
 
 
 function filter18(data18) {
-    let trust2018 = trust.filter(function(trust18) {//definierar funktionens variabel turst18
+    let trust2018 = data18.filter(function(trust18) {//definierar funktionens variabel turst18
     return (trust18.År == "2018"); //samma procedur dock för 2018.
     });
     return trust2018
 };
 
 
-let year17 = filter17(trust); //Anropar på funktionen som filtrerar min trust array och laddar in properties in i den lokala variablen
-let trustName17 = countyNames(year17); //anropar funktionen för alla enhetsnamn i varibel year17.
-let trustResult17 = countyResults(year17); //anropar funktionen för all resultat i variabel year17.
+var year17 = filter17(trust); //Anropar på funktionen som filtrerar min trust array och laddar in properties in i den lokala variablen
+var trustName17 = countyNames(year17); //anropar funktionen för alla enhetsnamn i varibel year17.
+var trustResult17 = countyResults(year17); //anropar funktionen för all resultat i variabel year17.
 
-let year18 = filter18(trust); //samma som ovan.
-let trustname18 = countyNames(year18); //samma som ovan.
-let trustResult18 = countyResults(year18);
+var year18 = filter18(trust); //samma som ovan.
+var trustname18 = countyNames(year18); //samma som ovan.
+var trustResult18 = countyResults(year18);
 
 var trace1 = {
     x: trustName17, 
