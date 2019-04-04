@@ -90,3 +90,4 @@ cni.index.name = 'Index'
 cni.drop(cni.iloc[:, 0:1], axis=1, inplace=True)
 cni.to_csv('cni.csv')
 py.offline.plot(fig)
+cni.to_json('cni.json')
