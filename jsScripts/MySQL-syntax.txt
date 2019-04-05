@@ -1,0 +1,7 @@
+Vi sorterar datat efter de f�r oss relevanta fr�gor.
+Statistiken �r h�mtad fr�n https://oppnadata.se/datamangd/#esc_entry=1032&esc_context=77
+
+SELECT * from stats 
+where nr_rapp in (1, 2, 4, 5, 15, 16, 47)
+
+D�refter exporterar vi v�r sortering till .json
