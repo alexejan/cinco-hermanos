@@ -33,7 +33,7 @@ df3 = df.loc[df['Delområde'] == 'Mödrahälsovård', ['Region', 'Värde']]
 df4 = df.loc[df['Delområde'] == 'Sjukgymnastik och Arbetsterapi', ['Region', 'Värde']]
 df5 = df.loc[df['Delområde'] == 'Sjuksköterskevård inkl. jourverksamhet', ['Region', 'Värde']]
 
-# variabler som innehåller dataunderlag för de grafer som ska skapas
+# traces för diagrammen som ska ritas upp använder metoden 'Bar' från plotly.graph_objs för att definiera  ett stapeldiagram. x-axel sätts till likvärdig med värdena i kolumnen för 'Region' och y-axeln sätts till att följa värdena i kolumnen 'Värde'.
 data1 = go.Bar(x=df1['Region'], y=df1['Värde'], name='Allmänläkarvård inkl. jourverksamhet') 
 data2 = go.Bar(x=df1['Region'], y=df2['Värde'], name='Barnhälsovård')
 data3 = go.Bar(x=df1['Region'], y=df3['Värde'], name='Mödrahälsovård')

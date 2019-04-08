@@ -11,9 +11,6 @@ sys.stdout.reconfigure(encoding='UTF-8')
 # läser in data från .csv-fil och lagrar den i en data frame
 vis_data = pd.read_csv(r"C:\Users\steblo\Desktop\Nackademin\Dropbox\BI-relaterade programspråk\Grupparbete\Kod\cinco-hermanos\truncated_data_SS.csv", sep=';', encoding='UTF-8')
 
-# # splittar årtal från eventuell följande distinktion (halvår/kvartal/månad). detta möjliggör gruppering i nya dataframes nedan
-# vis_data['Mätperiod'] = (vis_data['Mätperiod'].str.split(' ').str[0])
-
 # splittar årtal från eventuell följande distinktion (halvår/kvartal/månad). detta möjliggör gruppering i nya dataframes nedan
 vis_data['Mätperiod'] = (vis_data['Mätperiod'].str.split(' ').str[0])
 
@@ -32,7 +29,6 @@ def get_vis_data(string_var, data):
 
     # för att se till att endast data för det senast registrerade året lagras görs en ny dataframe där en filtrering görs på det maximala värdet i kolumnen Mätperiod, d v s det senaste året
     df = df_first.loc[df_first['Mätperiod'] == df_first['Mätperiod'].max(), ['Register/källa', 'Måttenhet', 'Titel', 'Område', 'Enhetsnamn','Mätperiod', 'Värde', 'Måttenhet', 'Täljare', 'Nämnare/antal fall']]    
-
 
     # sparar index för rader där värdet är okänt som ogiltiga rader  
     invalid_rows1 = df[df['Värde'] == 'UNK'].index  
@@ -89,14 +85,14 @@ def get_vis_data(string_var, data):
     # definition av layout för den graf som ska skapas 
     layout = go.Layout(xaxis = {'title':'Regioner och landsting' + ' ('+ str(df_first['Mätperiod'].max()) + ')'}, yaxis = {'title':str(df.iloc[0, 2])}, barmode = 'group', margin= dict(b = 100), showlegend = False)
 
-    # använder funktionen go.Figure för att skapa graf baserat på de tre dataunderlagen samt layout
+    # använder funktionen go.Figure för att skapa graf baserat på dataunderlaget (trace) samt layout
     figure = go.Figure(data = [trace], layout=layout)
 
     # graf renderas med plotlys offline-plot funktion (används i testsyfte)
-    plotly.offline.plot(figure, filename = str(df.iloc[0, 3]) + ".html")
+    # plotly.offline.plot(figure, filename = str(df.iloc[0, 3]) + ".html")
 
     # graf renderas med plotlys onine-plot funktion
-    # py.plot(figure, filename = str(df.iloc[0, 3]))
+    py.plot(figure, filename = str(df.iloc[0, 3]))
 
 # skapar en data series med unika värden från kolumnen Diagramrubrik i vis_data (den data frame till vilken källdata har lästs in) 
 df_series = vis_data.Diagramrubrik.unique()

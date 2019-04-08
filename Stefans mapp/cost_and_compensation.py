@@ -4,7 +4,7 @@ import plotly.graph_objs as go
 import pandas as pd
 import plotly.offline
 
-# läser in data från .csv-fil och lagrar dem i variabel
+# läser in data från .csv-fil och lagrar den i en data frame
 df = pd.read_csv(r'C:\Users\steblo\Desktop\Nackademin\Dropbox\BI-relaterade programspråk\Grupparbete\Kod\cinco-hermanos\Sammanstallning modeller.csv', sep=';', encoding='UTF-8')
 
 # ersätter strängen 'faktisk kostnad' med '0' för att strängen inte ska orsaka datatypsfel senare i skriptet
@@ -13,7 +13,7 @@ df["Kostnad läkarbesök på nationell taxa"] = df["Kostnad läkarbesök på nat
 # fyller alla tomma fält med värdet 0
 df.fillna(0, inplace=True)
 
-# gör om allt innehåll i data frameen till numeriska värden
+# gör om allt innehåll i data framen till numeriska värden
 df[["Kostnad för läkarbesök på annan vc", "Kostnad läkarbesök på nationell taxa",'Patientavgift Läkarbesök', 'Ersättning läkarbesök egenlistad', 'Ersättning läkarbesök listad annan vc', 'Ersättning läkarbesök utomlänspatient']] = df[["Kostnad för läkarbesök på annan vc", "Kostnad läkarbesök på nationell taxa", 'Patientavgift Läkarbesök', 'Ersättning läkarbesök egenlistad', 'Ersättning läkarbesök listad annan vc', 'Ersättning läkarbesök utomlänspatient']].apply(pd.to_numeric)
 
 # nya beräknade kolumner definieras som ska representera kostnader som negativa värden i den slutgiltiga grafen
@@ -88,6 +88,9 @@ layout = go.Layout(xaxis = {'title':'Regioner och landsting'}, yaxis = {'title':
 
 # använder funktionen go.Figure för att skapa graf baserat på  dataunderlaget ovan samt layout
 figure = go.Figure(data=trace, layout=layout)
+
+# skriver ut data frame till fil (med syfte att dumpa data i händelse att data frame kan återanvändas på annan plats) 
+df.to_csv('Dump av modell-data.csv')
 
 # graf renderas med plotlys offline-plot funktion (används i testsyfte)
 # plotly.offline.plot(fig, filename='Ersättningsmodell.html')

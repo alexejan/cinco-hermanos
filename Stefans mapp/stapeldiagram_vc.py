@@ -34,7 +34,7 @@ df['Andel'] = new_column
 df.sort_values('Landsting', ascending=True, inplace = True)
 
 # skriver ut data frame till fil (med syfte att dumpa data i händelse att data frame kan återanvändas på annan plats) 
-# df.to_csv('Dump av ekonomistatistik.csv')
+df.to_csv('Dump av statistik_vc.csv')
 
 # nya data frames som innehåller dataunderlag för de grafer som ska skapas
 df1 = df.loc[df['Storlek på vårdcentralerna'] == 'Vårdcentraler med 1 läkare', ['Landsting', 'Andel']]
@@ -45,7 +45,7 @@ df5 = df.loc[df['Storlek på vårdcentralerna'] == 'Vårdcentraler med 5-10 läk
 df6 = df.loc[df['Storlek på vårdcentralerna'] == 'Vårdcentraler med fler än 10 läkare', ['Landsting', 'Andel']]
 df7 = df.loc[df['Storlek på vårdcentralerna'] == 'Uppgift om storlek saknas', ['Landsting', 'Andel']]
 
-# variabler som innehåller dataunderlag för de grafer som ska skapas
+# traces för diagrammen som ska ritas upp använder metoden 'Bar' från plotly.graph_objs för att definiera  ett stapeldiagram. x-axel sätts till likvärdig med värdena i kolumnen för 'Landsting' och y-axeln sätts till att följa värdena i kolumnen 'Andel'.
 data1 = go.Bar(x=df1['Landsting'], y=df1['Andel'], name='Vårdcentraler med 1 läkare') 
 data2 = go.Bar(x=df2['Landsting'], y=df2['Andel'], name='Vårdcentraler med 2 läkare')
 data3 = go.Bar(x=df3['Landsting'], y=df3['Andel'], name='Vårdcentraler med 3 läkare')
@@ -57,7 +57,7 @@ data7 = go.Bar(x=df7['Landsting'], y=df7['Andel'], name='Uppgift om storlek sakn
 # definition av layout för den graf som ska skapas 
 layout = go.Layout(xaxis = {'title':'Regioner och landsting (2017)'}, yaxis = {'title': 'Andel av total'}, barmode = 'stack', margin = dict(b = 100), showlegend = True)
 
-# använder funktionen go.Figure för att skapa graf baserat på dataunderlaget samt layout
+# använder funktionen go.Figure för att skapa graf baserat på dataunderlagen samt layout
 figure = go.Figure(data = [data1, data2, data3, data4, data5, data6, data7], layout = layout)
 
 # graf renderas med plotlys offline-plot funktion (används i testsyfte)
