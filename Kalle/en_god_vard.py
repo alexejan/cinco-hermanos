@@ -15,9 +15,7 @@ def diff_from_mean(df, period):
         df['geo_cat'] == 'RIKET')].mean()), 2 - (df['value'].loc[(df['period_order'] == period)] / (df['value'].loc[(df['period_order'] == period) & (
         df['geo_cat'] == 'RIKET')].mean())))
 
-# pd.set_option('display.max_columns', 22)
-# pd.set_option('display.width', 2500)
-
+# Färgkodning för de fem sämsta länen
 colors = {'Skåne': 'maroon',
           'Gävleborg': 'gold',
           'Jämtland': 'purple',
