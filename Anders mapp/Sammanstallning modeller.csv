@@ -1,0 +1,22 @@
+﻿Landsting/Region;Patientavgift Läkarbesök;Ersättning läkarbesök egenlistad;Ersättning läkarbesök listad annan vc;Ersättning läkarbesök utomlänspatient;Kostnad för läkarbesök på annan vc;Kostnad läkarbesök på nationell taxa;Täckningsgrad
+Blekinge;150;150;150;1539;400;400;Ja
+Dalarna;200;100;500;1900;500;562;Ja
+Gotland;200;80;400;900;400;0;Ja
+Gävleborg;200;200;900;1900;700;700;Ja
+Halland;150;150;600;1539;450;740;Ja
+Jämtland;300;300;800;1892;500;faktisk kostnad;Nej
+Jönköping;250;150;450;1976;300;700;Nej
+Kalmar;200;0;500;1150;500;0;Ja
+Kronoberg;150;0;570;1539;570;0;Ja
+Norrbotten;200;200;630;1892;430;530;Nej
+Skåne;200;;350;1497;350;900;Ja
+Stockholm;200;250;250;1800;0;0;Ja
+Sörmland;0;200;400;1900;200;450;Ja
+Uppsala;150;313;626;833;313;0;Nej
+VGR;300;;500;500;500;500;Ja
+Värmland;200;0;500;1900;500;500;Nej
+Västerbotten;200;200;400;1892;200;200;Ja
+Västernorrland;;;;;;;
+Västmanland;150;110;600;1950;600;0;Nej
+Örebro;120;115;115;2015;500;0;Ja
+Östergötland;200;200;700;2195;500;0;Nej
