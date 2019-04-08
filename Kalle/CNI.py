@@ -104,7 +104,7 @@ layout = dict(margin=dict(l=10, t=10, b=0))
 fig = dict(data=[trace], layout=layout)
 py.plotly.plot(fig, filename='CNI')
 
-# Nedan användes till andra filer för lite test
+# Nedan användes till andra filer för lite test samt en god vård + cni = superindex :)
 # cni.insert(0, column='Länskod', value=befolkning_csv['Länskod'].apply(lambda x: '{0:0>2}'.format(x)))
 # cni.reset_index(inplace=True)
 # cni.index.name = 'Index'
